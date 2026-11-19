@@ -3,18 +3,22 @@ const express = require("express");
 const app = express();
 
 const dotenv = require("dotenv").config();
-const workoutRoute = require("./routes/workoutRoute"); // routes
+
+// RouteIndex called here
+
+const appRoute = require("./routes/index");
 
 const cors = require("cors"); // allow cors
 // Enable CORS
 app.use(cors());
 
 app.use(express.json());
+
+app.use("/", appRoute);
+
 // Connect database Mongodb
 const DBconnect = require("./database/DBConnect");
 DBconnect();
-
-app.use("/workout", workoutRoute); // menu routes called
 
 app.get("/", (req, res) => {
   res.send("Hoem Page Api called");
