@@ -5,10 +5,13 @@ exports.CreateWorkout = async (req, res) => {
   try {
     const { title, reps, load } = req.body;
 
+    console.log("bearTokenUser-", req.user._id);
+
     const data = {
       title: title,
       reps: reps,
       load: load,
+      user_id: req.user._id,
     };
 
     const Createdata = await WorkoutModel.create(data);
@@ -29,7 +32,9 @@ exports.CreateWorkout = async (req, res) => {
 };
 
 exports.ViewAllWorkout = async (req, res) => {
-  const Alldata = await WorkoutModel.find();
+  console.log("rr", req.user._id);
+
+  const Alldata = await WorkoutModel.find({ user_id: req.user._id });
 
   if (!Alldata) {
     return res.status(400).json({

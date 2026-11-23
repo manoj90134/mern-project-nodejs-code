@@ -2,6 +2,8 @@ const express = require("express");
 
 const Route = express.Router();
 
+const AuthMiddleware = require("../Middleware/AuthMiddleware");
+
 // import controller
 
 const {
@@ -15,6 +17,8 @@ const {
 Route.get("/", (req, res) => {
   res.send("<h1> This is Workout APi </h1>");
 });
+
+Route.use(AuthMiddleware); // Apply middleware in all workout Routes
 
 Route.get("/all-view", ViewAllWorkout); // view All
 

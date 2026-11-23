@@ -18,10 +18,15 @@ exports.Logincode = async (req, res) => {
 
     const Token = createToken(userdetails._id);
 
+    const response = {
+      ...userdetails.toObject(),
+      token: Token,
+    };
+
     res.status(200).json({
       success: true,
       message: "user login Successfully",
-      data: userdetails,
+      data: response,
       token: Token,
     });
   } catch (e) {
@@ -44,10 +49,15 @@ exports.SignupCode = async (req, res) => {
 
     const token = createToken(user._id);
 
+    const response = {
+      ...user.toObject(),
+      token: token,
+    };
+
     res.send({
       success: true,
       message: "user create Successfully",
-      date: user,
+      data: response,
       token: token,
     });
   } catch (e) {
