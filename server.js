@@ -21,7 +21,7 @@ const DBconnect = require("./database/DBConnect");
 DBconnect();
 
 app.get("/", (req, res) => {
-  res.send("Hoem Page Api called");
+  res.send(`Hoem Page Api called ${process.env.PORT}`);
 });
 
 const PORT = process.env.PORT || 6000;
